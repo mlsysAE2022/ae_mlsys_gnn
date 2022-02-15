@@ -24,6 +24,7 @@ We use the just-in-time compilation of the pytorch cpp-extension work flow.
 # Experiment Workflow
 
 - Go to `script/` directory.
+  First run `bash config.sh`.
 - **Figure 7 result:** `./figure7.sh` to run end-to-end experiments on three GNN models. Generate `figure7.csv` and `figure7_io.csv`.
 - **Figure 8 result:** `./figure8.sh` to run ablation study for operator reorganization. Generate `figure8.csv` and `figure8_io.csv`.
 - **Figure 9 result:** `./figure8.sh` to run ablation study for operator fusion. Generate `figure9.csv` and `figure9_io.csv`.
