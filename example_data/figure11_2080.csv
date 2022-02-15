@@ -1,0 +1,3 @@
+train_GAT_our,dataset=reddit,head=4,f=64,latency=2.1472510075569153s,memory=5691.0MB
+train_edgeconv_our,dataset=modelnet40,k=40,batch=64,latency=0.24359773116383127s,memory=2743.0MB
+train_monet_our,dataset=reddit,k=2,d=1,latency=1.3386210417747497s,memory=7203.0MB

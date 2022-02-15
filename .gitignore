@@ -1,0 +1,20 @@
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+__pycache__
+*.zip
+*.txt
+*.csv
+!example_data/*.csv
+*.mtx
+
+*.png
+*.pdf
+
+# vscode file
+.vscode

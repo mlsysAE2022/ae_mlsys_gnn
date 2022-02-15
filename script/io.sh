@@ -1,0 +1,2 @@
+python profile_inference.py
+python profile_train.py

@@ -1,0 +1,4 @@
+gatconv,withreorg,0.27395403385162354
+edgeconv,withoutreorg,5.101995468139648
+gatconv,withoutreorg,1.5603084564208984
+edgeconv,withreorg,3.1038098335266113

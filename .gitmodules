@@ -1,0 +1,5 @@
+[submodule "fuseGNN"]
+    ignore = dirty
+	path = fuseGNN
+	url = ../../apuaaChen/gcnLib
+    branch = master
