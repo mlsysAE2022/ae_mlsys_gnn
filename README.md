@@ -16,6 +16,16 @@
   - Ubuntu 18.04+
   - CUDA 11.0+
 
+# Docker
+
+To avoid different path of CUDA installation, we provide a docker to run our implementation. You could run our AE code in our docker container below.
+
+```bash
+cd docker
+docker build -t gnn:v1 -f Dockerfile .
+docker run -it gnn:v1 /bin/bash
+```
+
 # Installation
 
 To build our software, you need to install Ninja and PyTorch as shown in dependencies.
