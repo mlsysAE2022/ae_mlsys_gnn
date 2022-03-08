@@ -1,0 +1,4 @@
+gat_without_reorg,latency=0.0026543569564819337s,memory=2102.0MB
+gat_with_reorg,latency=0.0016680264472961426s,memory=1600.0MB
+edgeconv_without_reorg,latency=0.007205212116241455s,memory=3090.0MB
+edgeconv_with_reorg,latency=0.004863667488098145s,memory=2450.0MB

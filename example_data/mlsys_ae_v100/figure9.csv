@@ -1,0 +1,6 @@
+gat_without_fusion,latency=0.13097569942474366s,memory=11720.0MB
+gat_with_fusion,latency=0.11699606418609619s,memory=2862.0MB
+edgeconv_without_fusion,latency=0.004803228378295899s,memory=2450.0MB
+edgeconv_with_fusion,latency=0.0030401885509490968s,memory=1558.0MB
+monet_without_fusion,latency=0.042284798622131345s,memory=15648.0MB
+monet_with_fusion,latency=0.016942622661590575s,memory=3300.0MB

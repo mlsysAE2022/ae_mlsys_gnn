@@ -9,9 +9,9 @@
 __pycache__
 *.zip
 *.txt
-*.csv
+!*.csv
 *.mtx
-Dockerfile
+!Dockerfile
 
 *.png
 *.pdf

@@ -1,0 +1,4 @@
+train_GAT_stash,dataset=reddit,head=4,f=64,latency=0.6879589509963989s,memory=10780.0MB
+train_GAT_our,dataset=reddit,head=4,f=64,latency=0.6615323567390442s,memory=5776.0MB
+train_monet_stash,dataset=reddit,k=2,d=1,latency=0.5853564667701722s,memory=9484.0MB
+train_monet_our,dataset=reddit,k=2,d=1,latency=0.5027582669258117s,memory=7290.0MB
