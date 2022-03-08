@@ -18,6 +18,10 @@ ENV NV_CUDNN_PACKAGE libcudnn8-devel-${NV_CUDNN_VERSION}.cuda11.3
 LABEL maintainer "NVIDIA CORPORATION <sw-cuda-installer@nvidia.com>"
 LABEL com.nvidia.cudnn.version="${NV_CUDNN_VERSION}"
 
+RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos \
+    && dnf distro-sync \
+    && yum update -y
+
 RUN yum install -y \
     ${NV_CUDNN_PACKAGE} \
     && yum clean all \
