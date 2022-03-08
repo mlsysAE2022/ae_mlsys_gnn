@@ -10,8 +10,8 @@ __pycache__
 *.zip
 *.txt
 *.csv
-!example_data/*.csv
 *.mtx
+Dockerfile
 
 *.png
 *.pdf
