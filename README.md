@@ -16,20 +16,40 @@
   - Ubuntu 18.04+
   - CUDA 11.0+
 
-# Docker
+# File Organization
 
-To avoid different path of CUDA installation, we provide a docker to run our implementation. You could run our AE code in our docker container below.
-
-```bash
-cd docker
-docker build -t gnn:v1 -f Dockerfile .
-docker run -it gnn:v1 /bin/bash
-```
+- `src/`: the CUDA source code (`fused_edgeconv/fused_edgeconv.cu`,`fused_gat/fused_gat.cu`, and `fused_gmmconv/gmmconv.cu`) for GNN sparse kernels implemented with our proposed techniques, python binding of kernels (`fused_edgeconv/fused_edgeconv.cpp`, `fused_gat/fused_gat.cpp`, and `fused_gmmconv/gmmconv.cpp`), and some utilizations (`util/`).
+- `operators/`: wrap our kernels into PyTorch modules.
+- `layers/`: use the operators above to build up GAT, EdgeConv, and MoNet layers.
+- `script/`: result analysis scripts to replicate our results.
+- `example_data/`: raw experiment results.
+- `docker/`: docker file for setting up the running environment.
 
 # Installation
 
 To build our software, you need to install Ninja and PyTorch as shown in dependencies.
 We use the just-in-time compilation of the pytorch cpp-extension work flow.
+
+> _Warning_
+> If you find the bebug such as below, please comment the relevant code.
+
+```
+  File "/usr/local/anaconda3/envs/pytorch/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1606, in _get_cuda_arch_flags
+    arch_list[-1] += '+PTX'
+IndexError: list index out of range
+```
+
+Please make sure you have installed the nsight compute with your CUDA and configure your CUDA_HOME before replication. A typical path of nsight compute profiler is at `/usr/local/bin/nv-nsight-cu-cli`
+
+# Docker
+
+To avoid different path of CUDA installation, we provide a docker to run our implementation. You could run our AE code in our docker container below. We are sorry that profiling result needed by nv-nsight-cu-cli couldn’t be accomplished in the docker.
+
+```bash
+cd docker
+docker build -t gnn:v1 -f Dockerfile .
+docker run -it --runtime=nvidia --rm -v /home/yzm18/ae_mlsys_gnn/:/AE gnn:v1 /bin/bash
+```
 
 # Experiment Workflow
 
