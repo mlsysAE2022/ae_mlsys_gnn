@@ -11,9 +11,10 @@ conda config --set show_channel_urls yes
 
 conda create -n pytorch python=3.8
 source activate pytorch
-conda install pytorch torchvision torchaudio cudatoolkit=11.3
-pip install dgl-cu113==0.7.2 -f https://data.dgl.ai/wheels/repo.html
+pip install scipy -i https://pypi.tuna.tsinghua.edu.cn/simple
+conda install pytorch torchvision torchaudio cudatoolkit=11.3 tqdm
+conda install -c dglteam dgl
 conda install -c conda-forge ninja
-pip install auditwheel
+pip install auditwheel tqdm
 pip install requests
 conda clean --tarballs

@@ -1,40 +1,37 @@
-FROM nvidia/cuda:11.3.0-devel-centos8 as base
-
+FROM nvidia/cuda:11.3.0-devel-ubuntu18.04 as base
 FROM base as base-amd64
 
-ENV NV_CUDNN_VERSION 8.2.0.53-1
-ENV NV_CUDNN_PACKAGE libcudnn8-devel-${NV_CUDNN_VERSION}.cuda11.3
+ENV NV_CUDNN_VERSION 8.2.0.53
 
-FROM base as base-arm64
+ENV NV_CUDNN_PACKAGE "libcudnn8=$NV_CUDNN_VERSION-1+cuda11.3"
+ENV NV_CUDNN_PACKAGE_DEV "libcudnn8-dev=$NV_CUDNN_VERSION-1+cuda11.3"
+ENV NV_CUDNN_PACKAGE_NAME "libcudnn8"
 
-ENV NV_CUDNN_VERSION 8.2.0.53-1
-ENV NV_CUDNN_PACKAGE libcudnn8-devel-${NV_CUDNN_VERSION}.cuda11.3
-
-FROM base as base-ppc64le
-
-ENV NV_CUDNN_VERSION 8.2.0.53-1
-ENV NV_CUDNN_PACKAGE libcudnn8-devel-${NV_CUDNN_VERSION}.cuda11.3
-
-LABEL maintainer "NVIDIA CORPORATION <sw-cuda-installer@nvidia.com>"
+LABEL maintainer "NVIDIA CORPORATION <cudatools@nvidia.com>"
 LABEL com.nvidia.cudnn.version="${NV_CUDNN_VERSION}"
 
-RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos \
-    && dnf distro-sync \
-    && yum update -y
-
-RUN yum install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ${NV_CUDNN_PACKAGE} \
-    && yum clean all \
-    && rm -rf /var/cache/yum/*
+    ${NV_CUDNN_PACKAGE_DEV} \
+    && apt-mark hold ${NV_CUDNN_PACKAGE_NAME} && \
+    rm -rf /var/lib/apt/lists/*
 
-COPY install/centos_build.sh /install/centos_build.sh
-RUN bash /install/centos_build.sh
 
-COPY install/centos_conda.sh /install/centos_conda.sh
-RUN bash /install/centos_conda.sh
+# RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos \
+#     && dnf distro-sync \
+#     && yum update -y
 
-COPY install/centos_dgl.sh /install/centos_dgl.sh
-RUN bash /install/centos_dgl.sh
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai apt-get -y install tzdata
+
+COPY install/ubuntu_build.sh /install/ubuntu_build.sh
+RUN bash /install/ubuntu_build.sh
+
+COPY install/ubuntu_conda.sh /install/ubuntu_conda.sh
+RUN bash /install/ubuntu_conda.sh
+
+COPY install/ubuntu_dgl.sh /install/ubuntu_dgl.sh
+RUN bash /install/ubuntu_dgl.sh
 
 # COPY install/conda_env/tensorflow_gpu.yml /install/conda_env/tensorflow_gpu.yml
 # RUN ["/bin/bash", "-i", "-c", "conda env create -f /install/conda_env/tensorflow_gpu.yml"]
